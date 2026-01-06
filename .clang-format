@@ -1,0 +1,58 @@
+BasedOnStyle: LLVM
+Language: Cpp
+IndentWidth: 4
+UseCRLF: false
+UseTab: Never
+
+# Case label indent
+IndentCaseLabels: true
+CaseIndentWidth: 4
+
+# Namespace indent
+NamespaceIndentation: All
+
+ColumnLimit: 0 # unlimited
+
+# Force short if/else/for/while to break
+AllowShortLoopsOnASingleLine: false
+
+BreakBeforeBraces: Attach
+
+# Make access modifiers align with the class/struct name
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+
+SpaceBeforeParens: ControlStatements
+SpacesInConditionalStatement: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceInEmptyParentheses: false
+
+# Assignment operators
+SpaceBeforeAssignmentOperators: true
+SpaceAfterAssignmentOperators: true
+
+# Range-based for loop
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceAfterRangeBasedForLoopColon: true
+
+SpacesInAngles: false
+SpacesInContainerLiterals: false
+SpacesInCStyleCastParentheses: false
+# Space before comment at the end of a line
+SpacesInTrailingComments: true
+
+# Include
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: "^<Q.*"
+    Priority: 300
+  - Regex: "<.*"
+    Priority: 400
+  - Regex: '^".*'
+    Priority: 100
+  - Regex: ".*"
+    Priority: 1
+
+DerivePointerAlignment: false # clang-format will learn for the context if true, force to use PointerAlignment if false
+PointerAlignment: Left
