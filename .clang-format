@@ -8,6 +8,14 @@ UseTab: Never
 IndentCaseLabels: true
 CaseIndentWidth: 4
 
+# Constructor initializer indent
+ConstructorInitializerIndentWidth: 4
+BreakConstructorInitializers: BeforeComma
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+
+# Operator
+BreakBeforeBinaryOperators: NonAssignment
+
 # Namespace indent
 NamespaceIndentation: All
 
@@ -43,7 +51,7 @@ SpacesInCStyleCastParentheses: false
 SpacesInTrailingComments: true
 
 # Include
-IncludeBlocks: Regroup
+IncludeBlocks: Preserve
 IncludeCategories:
   - Regex: "^<Q.*"
     Priority: 300
