@@ -10,7 +10,7 @@
 
 int main(int argc, char* argv[]) {
 #ifdef Q_OS_WIN
-    // Actually steel from kde/krita/main.cc:MAIN_FN xD
+    // Actually steal from KDE/krita/main.cc:MAIN_FN xD
     if (GetACP() == CP_UTF8) {
         SetConsoleOutputCP(CP_UTF8);
     }
@@ -18,28 +18,37 @@ int main(int argc, char* argv[]) {
 
     try {
         LogHelper::installMessageHandler();
-        throw;
     } catch (const std::exception& e) {
-        fprintf(stderr, "Failed to install the message handler: %s", e.what());
+        fprintf(stderr, "Failed to install the message handler: %s\n", e.what());
         return EXIT_FAILURE;
     } catch (...) {
-        fputs("Failed to install the message handler: unknown exception.", stderr);
+        fputs("Failed to install the message handler: unknown exception.\n", stderr);
+        return EXIT_FAILURE;
     }
+
+    qDebug("The message handler is installed successfully.");
 
     std::unique_ptr<Application> app;
 
     try {
-        throw std::runtime_error("Test");
-        qDebug() << "---INITIALIZATION START---";
+        qDebug("---INITIALIZATION START---");
         app = std::make_unique<Application>(argc, argv);
-        qDebug() << "---INITIALIZATION FINISH---";
+        qDebug("The app is created successfully.");
+
+        app->showRootWidget();
+        qDebug("Show the all windows.");
+
+        qDebug("---INITIALIZATION FINISH---");
     } catch (const std::exception& e) {
-        qCritical() << "---INITIALIZATION FAILED---";
-        qCritical() << "Exception:" << typeid(e).name() << ':' << e.what();
+        qCritical("---INITIALIZATION FAILED---");
+        qCritical("Exception: %s", e.what());
         return EXIT_FAILURE;
     } catch (...) {
     }
 
-    // Reserve
-    return app->exec();
+    qDebug("Start application event loop.");
+    auto ret = app->exec();
+    qDebug("Finish application event loop.");
+    qInfo("Ready to close...");
+    return ret;
 }
