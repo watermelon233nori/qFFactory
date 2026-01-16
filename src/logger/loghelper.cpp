@@ -10,10 +10,7 @@
 // Windows specified
 #ifdef Q_OS_WIN
 #include <io.h>
-#endif
-
-// Unix/Linux specified
-#ifdef Q_OS_UNIX
+#else
 #include <unistd.h>
 #endif
 
@@ -136,13 +133,7 @@ namespace {
 } // namespace
 
 void LogHelper::installMessageHandler(QtMessageHandler handler) {
-    try {
-        qInstallMessageHandler(handler ? handler : _messageHandler);
-    } catch (const std::exception& e) {
-        throw std::runtime_error("Failed to install message handler: [typeid(e).name() => " + std::string(typeid(e).name()) + std::string(e.what()));
-    } catch (...) {
-        throw std::runtime_error("Failed to install message handler: unknown exception");
-    }
+    qInstallMessageHandler(handler ? handler : _messageHandler);
 }
 
 void LogHelper::operator()(QtMsgType type, const QMessageLogContext& context, const QString& msg) {
