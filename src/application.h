@@ -13,6 +13,8 @@ private:
 
 public:
     explicit Application(int& argc, char** argv);
+    void showRootWidget();
+    ~Application();
 };
 
 #endif

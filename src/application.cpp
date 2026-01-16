@@ -6,3 +6,10 @@ Application::Application(int& argc, char** argv)
     : QApplication(argc, argv)
     , m_rootWidget(new MainWindow) {
 }
+
+void Application::showRootWidget() {
+    m_rootWidget->show();
+}
+
+Application::~Application() {
+}
