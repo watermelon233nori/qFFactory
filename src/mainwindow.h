@@ -18,6 +18,7 @@ public:
 
 private:
     Ui::MainWindow* ui;
+    void setupConnections();
 };
 
 #endif
