@@ -18,7 +18,7 @@ private:
     static InstanceManager instance;
 
     QLocalServer m_server;
-    QLocalSocket m_socket;
+    QString m_serverName;
 
     InstanceManager() = default;
 };

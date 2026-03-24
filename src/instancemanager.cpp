@@ -46,10 +46,7 @@ namespace {
         LocalFree(sidString);
         CloseHandle(hToken);
         return sid; // e.g., "S-1-5-21-1234567890-1234567890-1234567890-1001"
-
 #else
-#warning Untested
-        // TODO I don't have a Linux desktop environment and macOS, so actually I have never test this part of code.
         return QString::number(getuid(), 10);
 #endif
     }
@@ -65,10 +62,10 @@ bool InstanceManager::init() {
     m_server.setSocketOptions(QLocalServer::UserAccessOption);
 
     auto app = qApp;
-    auto listenRes = m_server.listen(app->applicationName());
+    auto listenRes = m_server.listen(m_serverName);
     if (!listenRes) {
         // Failed to initialize
-        qWarning("Failed to create a QtLocalServer: %s", qUtf8Printable(m_server.errorString()));
+        qWarning("Failed to create a QLocalServer: %s", qUtf8Printable(m_server.errorString()));
         return false;
     }
 
@@ -78,11 +75,37 @@ bool InstanceManager::init() {
 
 bool InstanceManager::hasAnotherInstance() {
     auto app = qApp;
-    m_socket.setServerName(app->applicationName());
-    m_socket.connectToServer();
-    auto connRes = m_socket.waitForConnected(2000);
+    QLocalSocket sock;
+    m_serverName = _getCurrentUserIdString();
+    if (!m_serverName.isEmpty()) {
+        m_serverName += '/';
+    }
+
+    /**
+     * Actually I was ready to write the else statement like:
+     * 
+     * else { m_serverName = app->applicationName(); }
+     * 
+     * Why I wanna do this? Because I was thinking operator+= would make a deep copy even the QString is null or empty.
+     * But I noticed that a deep copy only happens when a QString is not null, also means isNull() == false.
+     * 
+     * You can check the implementation of QString::append(const QString& str): 
+     * https://code.qt.io/cgit/qt/qtbase.git/tree/src/corelib/text/qstring.cpp?h=6.8.2#n3140
+     * 
+     * What QString &QString::operator+=(const QString &s) do is just call the function that mentioned above.
+     * https://code.qt.io/cgit/qt/qtbase.git/tree/src/corelib/text/qstring.h?h=6.8.2#n542
+     * 
+     * So eventually I use operator+= of QString directly, that's it.
+     */
+    m_serverName += app->applicationName();
+    
+
+    sock.setServerName(m_serverName);
+    sock.connectToServer();
+    auto connRes = sock.waitForConnected(2000);
     if (connRes) {
-        m_socket.disconnect();
+        sock.disconnect();
+        qDebug("There's another qFFactory instance exist.");
         return true;
     }
 
