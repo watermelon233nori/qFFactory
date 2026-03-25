@@ -3,6 +3,12 @@
 
 #include <QWidget>
 
+QT_BEGIN_NAMESPACE
+namespace Ui {
+    class TaskWindow;
+}
+QT_END_NAMESPACE
+
 class TaskWindow : public QWidget {
     Q_OBJECT
 
