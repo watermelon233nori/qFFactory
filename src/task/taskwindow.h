@@ -15,7 +15,8 @@ class TaskWindow : public QWidget {
 public:
     explicit TaskWindow(QWidget* parent = nullptr);
 
-signals:
+private:
+    Ui::TaskWindow* ui;
 };
 
 #endif

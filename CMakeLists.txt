@@ -24,6 +24,7 @@ qt_standard_project_setup()
 qt_add_executable(qFFactory
     src/logger/loghelper.cpp
     src/task/taskwindow.cpp
+    src/task/taskwindow.ui
     src/main.cpp
     src/application.cpp
     src/mainwindow.cpp
