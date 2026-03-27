@@ -7,10 +7,6 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     setupConnections();
 }
 
-MainWindow::~MainWindow() {
-    delete ui;
-}
-
 void MainWindow::setupConnections() {
     connect(ui->actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt, Qt::DirectConnection);
 }
