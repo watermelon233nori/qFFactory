@@ -5,3 +5,6 @@
 TaskWindow::TaskWindow(QWidget* parent)
     : QWidget{parent} {
 }
+
+void TaskWindow::setupConnections() {
+}

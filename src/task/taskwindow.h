@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include <memory>
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
     class TaskWindow;
@@ -14,9 +16,12 @@ class TaskWindow : public QWidget {
 
 public:
     explicit TaskWindow(QWidget* parent = nullptr);
+    void setupConnections();
 
 private:
-    Ui::TaskWindow* ui;
+    std::unique_ptr<Ui::TaskWindow> ui;
+
+    
 };
 
 #endif
