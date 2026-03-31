@@ -8,5 +8,5 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 }
 
 void MainWindow::setupConnections() {
-    connect(ui->actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt, Qt::DirectConnection);
+    connect(ui->actionAboutQt, &QAction::triggered, qApp, &QApplication::aboutQt);
 }
