@@ -18,10 +18,11 @@ public:
     explicit TaskWindow(QWidget* parent = nullptr);
     void setupConnections();
 
+public slots:
+    void onInputFileButtonClicked();
+
 private:
     std::unique_ptr<Ui::TaskWindow> ui;
-
-    
 };
 
 #endif

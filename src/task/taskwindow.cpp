@@ -7,4 +7,9 @@ TaskWindow::TaskWindow(QWidget* parent)
 }
 
 void TaskWindow::setupConnections() {
+    connect(ui->inputFilePushButton, &QPushButton::clicked, this, &TaskWindow::onInputFileButtonClicked);
+}
+
+void TaskWindow::onInputFileButtonClicked() {
+    // TODO
 }
