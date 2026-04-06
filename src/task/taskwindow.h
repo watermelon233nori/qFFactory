@@ -20,6 +20,7 @@ public:
 
 public slots:
     void onInputFileButtonClicked();
+    void onOutputFileButtonClicked();
 
 private:
     std::unique_ptr<Ui::TaskWindow> ui;

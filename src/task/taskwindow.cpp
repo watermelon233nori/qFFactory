@@ -5,17 +5,17 @@
 #include <QFileDialog>
 #include <QStandardPaths>
 
-TaskWindow::TaskWindow(QWidget* parent) : QDialog{parent} {
+TaskWindow::TaskWindow(QWidget* parent) : QDialog{parent}, ui(std::make_unique<Ui::TaskWindow>()) {
+    assert(ui != nullptr);
     ui->setupUi(this);
     setupConnections();
 }
 
 TaskWindow::~TaskWindow() = default;
 
-
 void TaskWindow::setupConnections() {
-    connect(ui->inputFilePushButton, &std::remove_pointer_t<decltype(ui->inputFilePushButton)>::clicked,
-            this, &std::remove_pointer_t<decltype(this)>::onInputFileButtonClicked);
+    connect(ui->inputFilePushButton, &QPushButton::clicked, this, &TaskWindow::onInputFileButtonClicked);
+    connect(ui->outputFilePushButton, &QPushButton::clicked, this, &TaskWindow::onOutputFileButtonClicked);
 }
 
 void TaskWindow::onInputFileButtonClicked() {
@@ -26,5 +26,16 @@ void TaskWindow::onInputFileButtonClicked() {
         ui->inputFileLineEdit->setText(fileName);
     } else {
         qInfo("There's no input file(s) are selected.");
+    }
+}
+
+void TaskWindow::onOutputFileButtonClicked() {
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    "Save as...",
+                                                    QStandardPaths::standardLocations(QStandardPaths::HomeLocation).front());
+    if (!fileName.isEmpty()) {
+        ui->outputFileLineEdit->setText(fileName);
+    } else {
+        qInfo("The output file name are not specified.");
     }
 }
