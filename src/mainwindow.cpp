@@ -5,7 +5,8 @@
 
 #include <QMessageBox>
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(std::make_unique<Ui::MainWindow>()) {
+    assert(ui != nullptr);
     ui->setupUi(this);
     setupConnections();
 }
@@ -19,9 +20,9 @@ void MainWindow::setupConnections() {
 
 void MainWindow::onOpenFileTriggered() {
     try {
-        auto p = new TaskWindow(this);
-        qDebug("A TaskWindow was successfully created. TaskWindow address: 0x%p. Parent address: 0x%p", p, this);
-        p->show();
+        auto pTaskWindow = new TaskWindow(this);
+        qDebug("A TaskWindow was successfully created. TaskWindow address: 0x%p. Parent address: 0x%p", pTaskWindow, this);
+        pTaskWindow->show();
     } catch (std::exception& ex) {
         QMessageBox::critical(this, "Internal Error", "Failed to create a task window.");
     }
