@@ -21,6 +21,7 @@ public:
 private:
     std::unique_ptr<Ui::MainWindow> ui;
     void setupConnections();
+    void onOpenFileTriggered();
 };
 
 #endif

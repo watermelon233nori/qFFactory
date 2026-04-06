@@ -1,7 +1,7 @@
 #ifndef TASKWINDOW_H
 #define TASKWINDOW_H
 
-#include <QWidget>
+#include <QDialog>
 
 #include <memory>
 
@@ -11,18 +11,19 @@ namespace Ui {
 }
 QT_END_NAMESPACE
 
-class TaskWindow : public QWidget {
+class TaskWindow : public QDialog {
     Q_OBJECT
 
 public:
     explicit TaskWindow(QWidget* parent = nullptr);
-    void setupConnections();
+    ~TaskWindow();
 
 public slots:
     void onInputFileButtonClicked();
 
 private:
     std::unique_ptr<Ui::TaskWindow> ui;
+    void setupConnections();
 };
 
 #endif
