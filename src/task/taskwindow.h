@@ -21,6 +21,7 @@ public:
 public slots:
     void onInputFileButtonClicked();
     void onOutputFileButtonClicked();
+    void onButtonBoxClicked(QAbstractButton* button);
 
 private:
     std::unique_ptr<Ui::TaskWindow> ui;
