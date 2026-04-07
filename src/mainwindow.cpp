@@ -22,6 +22,7 @@ void MainWindow::onOpenFileTriggered() {
     try {
         auto pTaskWindow = new TaskWindow(this);
         qDebug("A TaskWindow was successfully created. TaskWindow address: 0x%p. Parent address: 0x%p", pTaskWindow, this);
+        pTaskWindow->setAttribute(Qt::WA_DeleteOnClose);
         pTaskWindow->show();
     } catch (std::exception& ex) {
         QMessageBox::critical(this, "Internal Error", "Failed to create a task window.");
