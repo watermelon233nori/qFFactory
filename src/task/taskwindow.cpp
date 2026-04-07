@@ -20,7 +20,7 @@ void TaskWindow::setupConnections() {
 
 void TaskWindow::onInputFileButtonClicked() {
     QString fileName = QFileDialog::getOpenFileName(this,
-                                                    "Open a input file...",
+                                                    QString(),
                                                     QStandardPaths::standardLocations(QStandardPaths::HomeLocation).front());
     if (!fileName.isEmpty()) {
         ui->inputFileLineEdit->setText(fileName);
@@ -31,7 +31,7 @@ void TaskWindow::onInputFileButtonClicked() {
 
 void TaskWindow::onOutputFileButtonClicked() {
     QString fileName = QFileDialog::getSaveFileName(this,
-                                                    "Save as...",
+                                                    QString(),
                                                     QStandardPaths::standardLocations(QStandardPaths::HomeLocation).front());
     if (!fileName.isEmpty()) {
         ui->outputFileLineEdit->setText(fileName);
