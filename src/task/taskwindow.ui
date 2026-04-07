@@ -75,7 +75,7 @@
       <item>
        <widget class="QPushButton" name="outputFilePushButton">
         <property name="text">
-         <string>PushButton</string>
+         <string>Select</string>
         </property>
        </widget>
       </item>
