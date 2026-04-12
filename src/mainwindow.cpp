@@ -4,9 +4,11 @@
 #include "ui_mainwindow.h"
 
 #include <QMessageBox>
+#include <QtAssert>
 
-MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(std::make_unique<Ui::MainWindow>()) {
-    assert(ui != nullptr);
+MainWindow::MainWindow(QWidget* parent)
+    : QMainWindow(parent), ui(std::make_unique<Ui::MainWindow>()) {
+    Q_ASSERT(ui != nullptr);
     ui->setupUi(this);
     setupConnections();
 }
