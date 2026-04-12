@@ -6,11 +6,13 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QStandardPaths>
+#include <QtAssert>
 
 #include <future>
 
-TaskWindow::TaskWindow(QWidget* parent) : QDialog{parent}, ui(std::make_unique<Ui::TaskWindow>()) {
-    assert(ui != nullptr);
+TaskWindow::TaskWindow(QWidget* parent)
+    : QDialog{parent}, ui(std::make_unique<Ui::TaskWindow>()) {
+    Q_ASSERT(ui != nullptr);
     ui->setupUi(this);
     setupConnections();
 }
