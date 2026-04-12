@@ -2,6 +2,7 @@
 #define TASKWINDOW_H
 
 #include <QDialog>
+#include <QAbstractButton>
 
 #include <memory>
 
