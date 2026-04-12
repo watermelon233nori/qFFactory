@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
         qDebug("The app is created successfully.");
 
         app->showRootWidget();
-        qDebug("Show the all windows.");
+        qDebug("Show the root window of the app.");
 
         qDebug("---INITIALIZATION FINISH---");
     } catch (const std::exception& e) {
